@@ -1,4 +1,18 @@
 
+int power(int base, int p){ //this user defined function takes a number and power vaue and returns base^p
+   int result = 1;
+   if(p){ //if the value is not 0, it runs the statement below
+      for(int i = p; i > 0; i--){ //i i set to p and condition checks if i is greater than 1 if yes...it runs the statement
+      // in the for block which is base is multiplied by base until i is equal 1 
+         result *= base;
+      }
+      return result;
+   }
+   else{ //if the value of p is 0
+      return result; //returns 1
+   }
+}
+
 int isLower(int ch){
    if(ch >= 97 && ch <= 122)
       return 1;
@@ -125,6 +139,16 @@ int Strncmpi(const char* string1, const char* string2, int size){
       return 1;
 }
 
+void Strcat(char* string1, const char* string2){
+
+   int i, j;
+
+    for(i = Strlen(string1), j = 0;j < Strlen(string2); i++, j++)
+        *(string1+i) = *(string2+j);            
+    *(string1+i) = '\0';
+
+}
+
 void Strncat(char* string1, const char* string2, int size){
 
    int total_size = Strlen(string1)+Strlen(string2);
@@ -143,6 +167,19 @@ void Strncat(char* string1, const char* string2, int size){
       *(string1+i) = '\0';
 
    }
+}
+
+int Strncut(char* destination, char* source, int ncut){
+   
+   int i, len;
+   for(i = 0; i < ncut; i++){
+      *(destination+i) = *source;
+        len = delete(source, 0, Strlen(source));
+    }
+   *(destination+i) = '\0';
+   
+   return len;
+   
 }
 
 int AtoI(const char* str){ //changes number stored in a string to integer
@@ -260,25 +297,20 @@ int binSearch_retIndex(char*data, int size, int element){
     int low, high, mid;
     low = 0;
     high = size-1;
-    while(low < high){
-        if(element == data[low]){
-           return low;
-            break;
-        } else if(element == data[high]){
-           return high;
-            break;
-        } else {
-            mid = (low+high)/2;
-            if (element == data[mid]){
-               return mid;
-                break;
-            } else if (element < data[mid]){
-                high = mid-1;
-            } else if (element > data[mid]){
-                low = mid+1;
-            }
-        }
-    }
+    while(low <= high){
+        
+      mid = (low+high)/2;
+      if (element == data[mid]){
+         return mid;
+         break;
+      } else if (element < data[mid]){
+            high = mid-1;
+      } else if (element > data[mid]){
+            low = mid+1;
+      }
+
+   }
+   return 0;
 
 }
 int binSearch_retStat(char*data, int size, int element){
@@ -291,14 +323,15 @@ int binSearch_retStat(char*data, int size, int element){
       mid = (low+high)/2;
       if (element == data[mid]){
          return 1;
-            break;
+         break;
       } else if (element < data[mid]){
             high = mid-1;
       } else if (element > data[mid]){
             low = mid+1;
       }
 
-    }
+   }
+   return 0;
 
 }
 
@@ -351,10 +384,10 @@ int delete(char*data, int index, int length){
 
 }
 
-void Memset(char*data, int val, int len){
+void memreset(char* string, int u_size){
    
-   for(int i = 0; i < len; i++){
-      *(data+i) = val;
+   for(int i = 0; i < u_size; i++){
+      *(string+i) = '\0';
    }
 }
 
